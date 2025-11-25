@@ -65,9 +65,21 @@ main {
   flex-direction: column;
   background: transparent;
   border-radius: 8px;
-  border: 1px solid #6c8cff;
+  
   overflow: hidden;
   align-items: center;
+  box-shadow:
+      0 2px 6px rgba(78, 117, 255, 0.18),
+      0 0 6px rgba(78, 117, 255, 0.14);
+    transition: box-shadow 180ms ease, transform 120ms ease;
+  
+}
+
+.gallery-item:hover {
+  box-shadow:
+      0 6px 12px rgba(78, 117, 255, 0.22),
+      0 0 10px rgba(78, 117, 255, 0.18);
+    transform: translateY(-4px);
 }
 
 .gallery-link {
@@ -117,35 +129,55 @@ main {
   }
 }
 
-/* HTML: <div class="loader"></div> */
 .loader {
-  margin: 0 auto;
-  width: 40px;
-  aspect-ratio: 2;
-  --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000);
-  background:
-    var(--_g) 0% 50%,
-    var(--_g) 50% 50%,
-    var(--_g) 100% 50%;
-  background-size: calc(100%/3) 50%;
-  animation: l3 1s infinite linear;
+  width: 82px;
+  height: 18px;
+  position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
 }
 
-@keyframes l3 {
-  20% {
-    background-position: 0% 0%, 50% 50%, 100% 50%
+.loader::before,
+.loader::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 10%);
+  top: 0;
+  background: #4e75ff;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  animation: jump 0.5s ease-in infinite alternate;
+}
+
+.loader::after {
+  background: #0000;
+  color: #9aa7d5;
+  top: 100%;
+  box-shadow: 32px -20px, -32px -20px;
+  animation: split 0.5s ease-out infinite alternate;
+}
+
+@keyframes split {
+  0% {
+    box-shadow: 8px -20px, -8px -20px
   }
 
-  40% {
-    background-position: 0% 100%, 50% 0%, 100% 50%
+  100% {
+    box-shadow: 32px -20px, -32px -20px
+  }
+}
+
+@keyframes jump {
+  0% {
+    transform: translate(-50%, -150%)
   }
 
-  60% {
-    background-position: 0% 50%, 50% 100%, 100% 0%
-  }
-
-  80% {
-    background-position: 0% 50%, 50% 50%, 100% 100%
+  100% {
+    transform: translate(-50%, 10%)
   }
 }
 
