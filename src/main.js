@@ -11,7 +11,7 @@ import {
 function showError(error) {
   iziToast.error({
     message: error,
-    position: 'topCenter',
+    position: 'topRight',
     color: '#f2aaaaff',
     // icon: false,
     progressBar: false,
